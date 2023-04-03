@@ -2,6 +2,7 @@ package kr.co.deco.house.service.member.impl;
 
 import kr.co.deco.house.entity.member.Member;
 import kr.co.deco.house.enums.common.ApiExceptionType;
+import kr.co.deco.house.enums.member.MemberRoleType;
 import kr.co.deco.house.exception.ApiException;
 import kr.co.deco.house.mapper.member.MemberMapper;
 import kr.co.deco.house.service.member.MemberService;
@@ -26,9 +27,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findOne(Member member) throws ApiException {
-        if(member.getId() == null || member.getId().trim().equals("")) {
-            throw new ApiException(ApiExceptionType.MISSING_PARAMETER, "String", "id");
-        }
         return memberMapper.findOne(member);
     }
 
@@ -49,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
         }
         member.setId(UUID.randomUUID().toString());
         member.setPassword(passwordEncoder.encode(member.getPassword()));
-        member.setRole("ROLE_ADMIN");
+        member.setRole(MemberRoleType.ROLE_ADMIN.getName());
         memberMapper.create(member);
     }
 

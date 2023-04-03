@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -7,3 +9,25 @@ spring:
 mybatis:
   type-aliases-package: kr.co.deco.house.entity
   mapper-locations: classpath:mappers/**/*.xml
+
+kakao:
+  app:
+    client-id:
+
+
+---
+
+spring:
+  profiles:
+    active: dev
+server:
+  port: 8081
+
+#ssssssssss
+---
+#sssssss
+server:
+  port: 8082
+spring:
+  profiles:
+    active: prod

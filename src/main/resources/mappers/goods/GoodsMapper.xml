@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.co.deco.house.mapper.goods.GoodsMapper">
+
+    <resultMap id="BaseResultMap" type="Goods">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="thumb_nail" property="thumbNail"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <sql id="columns">
+        ${alias}id AS ${prefix}id
+        , ${alias}title AS ${prefix}title
+        , ${alias}description AS ${prefix}description
+        , ${alias}thumb_nail AS ${prefix}thumb_nail
+        , ${alias}create_date AS ${prefix}create_date
+        , ${alias}update_date AS ${prefix}update_date
+    </sql>
+
+    <select id="findAll" parameterType="Goods" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns">
+            <property name="alias" value=""/>
+            <property name="prefix" value=""/>
+        </include>
+        FROM goods
+    </select>
+
+    <select id="findOne" parameterType="Goods" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns">
+            <property name="alias" value=""/>
+            <property name="prefix" value=""/>
+        </include>
+        FROM goods
+        WHERE id = #{id}
+    </select>
+
+    <insert id="create" parameterType="Goods">
+        INSERT INTO
+        goods (id, title, description, thumb_nail)
+        VALUES (#{id}, #{title}, #{description}, #{thumbNail})
+    </insert>
+
+    <update id="update" parameterType="Goods">
+        UPDATE goods
+        SET
+            update_date = current_timestamp
+            <if test="title != null and title != ''">
+                , title = #{title}
+            </if>
+            <if test="description != null and description != ''">
+                , description = #{description}
+            </if>
+            <if test="thumbNail != null and thumbNail != ''">
+                , thumb_nail = #{thumbNail}
+            </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Goods">
+        DELETE FROM goods WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final MemberMapper memberMapper;
 
@@ -20,6 +20,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if(member == null) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
-        return null;
+        return member;
     }
 }

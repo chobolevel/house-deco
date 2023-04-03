@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>집 꾸</title>
@@ -7,6 +7,7 @@
 <body>
 
 <h1>집 꾸미기 홈</h1>
+<p sec:authorize="isAuthenticated()">로그인 성공</p>
 
 </body>
 </html>
