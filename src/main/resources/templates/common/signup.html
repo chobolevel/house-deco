@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" layout:decorate="~{layout/default_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>집 꾸 - 회원가입</title>
 </head>
 <body>
 
-<form action="/signup" method="POST">
-    USERNAME: <input name="username" type="text"/><br>
-    PASSWORD: <input name="password" type="password"/><br>
-    NAME: <input name="name" type="text"/><br>
-    EMAIL: <input name="email" type="text"/><br>
-    MOBILE: <input name="mobile" type="text"/><br>
-    ADDRESS: <input name="address" type="text"/><br>
-    <button>SIGN UP</button>
-</form>
+<div layout:fragment="content">
+    <form action="/signup" method="POST">
+        USERNAME: <input name="username" type="text"/><br>
+        PASSWORD: <input name="password" type="password"/><br>
+        NAME: <input name="name" type="text"/><br>
+        EMAIL: <input name="email" type="text"/><br>
+        MOBILE: <input name="mobile" type="text"/><br>
+        ADDRESS: <input name="address" type="text"/><br>
+        <button>SIGN UP</button>
+    </form>
+</div>
 
 </body>
 </html>

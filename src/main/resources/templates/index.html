@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko"
+      layout:decorate="~{layout/default_layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>집 꾸</title>
 </head>
 <body>
 
-<h1>집 꾸미기 홈</h1>
-<p sec:authorize="isAuthenticated()">로그인 성공</p>
+<section layout:fragment="content">
+    INDEX
+</section>
 
 </body>
 </html>
