@@ -18,8 +18,12 @@ social:
   app:
     kakao:
       client-id: 46bd758cb8caf1c4edc4549db3094436
-      redirect_uri: http://localhost:8080/auth/token
+      redirect_uri: http://localhost:8080/auth/kakao
     naver:
       client-id: 5GV6LNs1bbuTsXojYY5Y
       client-secret: 8i7GJ93uLo
       redirect-uri: http://localhost:8080/auth/naver
+    micro-soft:
+      client-id: aa37dd07-47bc-4942-a172-7a50666bb9e6
+      client-secret: zJq8Q~9tKc0TLUUEXy7YkeWID1yJOOvcH18o3bFd
+      redirect-uri: http://localhost:8080/auth/ms

@@ -10,11 +10,13 @@ public class SocialAppProperties {
 
     private Kakao kakao;
     private Naver naver;
+    private Microsoft microsoft;
 
     @ConstructorBinding
-    public SocialAppProperties(Kakao kakao, Naver naver) {
+    public SocialAppProperties(Kakao kakao, Naver naver, Microsoft microsoft) {
         this.kakao = kakao;
         this.naver = naver;
+        this.microsoft = microsoft;
     }
 
     @Getter
@@ -36,8 +38,21 @@ public class SocialAppProperties {
         private String redirectUri;
 
         @ConstructorBinding
-
         public Naver(String clientId, String clientSecret, String redirectUri) {
+            this.clientId = clientId;
+            this.clientSecret = clientSecret;
+            this.redirectUri = redirectUri;
+        }
+    }
+
+    @Getter
+    public static class Microsoft {
+        private String clientId;
+        private String clientSecret;
+        private String redirectUri;
+
+        @ConstructorBinding
+        public Microsoft(String clientId, String clientSecret, String redirectUri) {
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.redirectUri = redirectUri;

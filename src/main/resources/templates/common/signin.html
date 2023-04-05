@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko" layout:decorate="~{layout/default_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8">
+<head layout:fragment="head">
     <title>집 꾸 - 로그인</title>
 </head>
 <body>
 
 <div layout:fragment="content">
-    <p th:if="${param.error}">[[${param.msg}]]</p>
+    <p th:if="${param.error}">[[${param.errorMsg}]]</p>
     <form action="/signin" method="POST">
         USERNAME: <input name="username" type="text"/><br>
         PASSWORD: <input name="password" type="password"/><br>
         <button>SIGN IN</button>
         <button id="kakaoLoginBtn">KAKAO LOGIN</button>
         <button id="naverLoginBtn">NAVER LOGIN</button>
+        <button id="msLoginBtn">MS LOGIN</button>
     </form>
 </div>
 
@@ -21,22 +21,38 @@
 </body>
 </html>
 <script th:inline="javascript">
-    /*<![CDATA[*/
-    const KAKAO_CLIENT_ID = /*[[${@environment.getProperty('social.app.kakao.client-id')}]]*/
-    const KAKAO_REDIRECT_URI = /*[[${@environment.getProperty('social.app.kakao.redirect-uri')}]]*/
-    const NAVER_CLIENT_ID = /*[[${@environment.getProperty('social.app.naver.client-id')}]]*/
-    const NAVER_REDIRECT_URI = /*[[${@environment.getProperty('social.app.naver.redirect-uri')}]]*/
+    const KAKAO_CLIENT_ID = [[${@environment.getProperty('social.app.kakao.client-id')}]]
+    const KAKAO_REDIRECT_URI = [[${@environment.getProperty('social.app.kakao.redirect-uri')}]]
+    const NAVER_CLIENT_ID = [[${@environment.getProperty('social.app.naver.client-id')}]]
+    const NAVER_REDIRECT_URI = [[${@environment.getProperty('social.app.naver.redirect-uri')}]]
+    const MS_CLIENT_ID = [[${@environment.getProperty('social.app.microsoft.client-id')}]]
+    const MS_REDIRECT_URI = [[${@environment.getProperty('social.app.microsoft.redirect-uri')}]]
 
     const kakaoLoginBtn = document.querySelector("#kakaoLoginBtn");
     const naverLoginBtn = document.querySelector("#naverLoginBtn");
+    const msLoginBtn = document.querySelector("#msLoginBtn");
 
     kakaoLoginBtn.addEventListener("click", (e) => {
         e.preventDefault()
-        window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`
+        console.log(KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI)
+        window.location.href = `https://kauth.kakao.com/oauth/authorize
+            ?response_type=code
+            &client_id=${KAKAO_CLIENT_ID}
+            &redirect_uri=${KAKAO_REDIRECT_URI}`
     })
     naverLoginBtn.addEventListener("click", (e) => {
         e.preventDefault()
-        window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${NAVER_REDIRECT_URI}`
+        window.location.href = `https://nid.naver.com/oauth2.0/authorize
+            ?response_type=code
+            &client_id=${NAVER_CLIENT_ID}
+            &redirect_uri=${NAVER_REDIRECT_URI}`
     })
-    /*]]>*/
+    msLoginBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+            ?response_type=code
+            &client_id=${MS_CLIENT_ID}
+            &redirect_uri=${MS_REDIRECT_URI}
+            &scope=user.read profile openid offline_access`
+    })
 </script>
