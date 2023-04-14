@@ -1,4 +1,4 @@
-package kr.co.deco.house.config.security;
+package kr.co.deco.house.config.security.service;
 
 import kr.co.deco.house.entity.member.Member;
 import kr.co.deco.house.mapper.member.MemberMapper;
