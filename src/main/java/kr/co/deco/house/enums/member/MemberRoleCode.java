@@ -2,14 +2,14 @@ package kr.co.deco.house.enums.member;
 
 import kr.co.deco.house.enums.EnumBase;
 
-public enum MemberRoleType implements EnumBase {
-    ROLE_ADMIN("ROLE_ADMIN"),
-    ROLE_USER("ROLE_USER");
+public enum MemberRoleCode implements EnumBase {
+    ROLE_SYSTEM_ADMIN("시스템 관리자"),
+    ROLE_ADMIN("일반 관리자")
     ;
 
     private final String name;
 
-    MemberRoleType(String name) {
+    MemberRoleCode(String name) {
         this.name = name;
     }
 
@@ -20,6 +20,6 @@ public enum MemberRoleType implements EnumBase {
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 }

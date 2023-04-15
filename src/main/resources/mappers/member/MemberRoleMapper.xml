@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.co.deco.house.mapper.member.MemberRoleMapper">
+
+    <resultMap id="BaseResultMap" type="MemberRole">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <sql id="columns">
+        ${alias}id AS ${prefix}id
+        , ${alias}code as ${prefix}code
+        , ${alias}name as ${prefix}name
+        , ${alias}create_date as ${prefix}create_date
+        , ${alias}update_date as ${prefix}update_date
+    </sql>
+
+    <select id="findAll" parameterType="MemberRole" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns">
+            <property name="alias" value=""/>
+            <property name="prefix" value=""/>
+        </include>
+        FROM member_role
+    </select>
+
+    <select id="findOne" parameterType="MemberRole" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns">
+            <property name="alias" value=""/>
+            <property name="prefix" value=""/>
+        </include>
+        FROM member_role
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="code != null">
+                code = #{code}
+            </if>
+        </where>
+    </select>
+
+    <insert id="create" parameterType="MemberRole">
+        INSERT INTO member_role
+        (id
+        , code
+        , name)
+        VALUES
+        (#{id}
+        , #{code}
+        , #{name})
+    </insert>
+
+    <update id="update" parameterType="MemberRole">
+        UPDATE member_role
+        SET update_date = current_timestamp()
+        <if test="code != null">
+            , code = #{code}
+        </if>
+        <if test="name != null and name != ''">
+            , name = #{name}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="MemberRole">
+        DELETE FROM member_role WHERE id = #{id}
+    </delete>
+
+</mapper>

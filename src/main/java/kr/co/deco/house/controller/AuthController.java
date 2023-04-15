@@ -30,7 +30,7 @@ public class AuthController {
 
     private final MemberService memberService;
     private final SocialAppProperties appProperties;
-    private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping("kakao")
     public String token(@RequestParam("code") String code, RedirectAttributes rttr) throws ApiException {
