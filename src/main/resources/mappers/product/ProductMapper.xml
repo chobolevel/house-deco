@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.co.deco.house.mapper.product.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="Product">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="desc" property="desc"/>
+        <result column="main_img" property="mainImg"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <sql id="columns">
+        ${alias}id AS ${prefix}id
+        , ${alias}title AS ${prefix}title
+        , ${alias}`desc` AS `${prefix}desc`
+        , ${alias}main_img AS ${prefix}main_img
+        , ${alias}create_date AS ${prefix}create_date
+        , ${alias}update_date AS ${prefix}update_date
+    </sql>
+
+    <select id="findAll" parameterMap="Product" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns">
+            <property name="alias" value=""/>
+            <property name="prefix" value=""/>
+        </include>
+        FROM product
+    </select>
+
+    <select id="findOne" parameterMap="Product" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns">
+            <property name="alias" value=""/>
+            <property name="prefix" value=""/>
+        </include>
+        FROM product
+        WHERE id = #{id}
+    </select>
+
+    <insert id="create" parameterType="Product">
+        INSERT INTO product
+        (id
+        , title
+        , `desc`
+        , main_img)
+        VALUES
+        (#{id}
+        , #{title}
+        , #{desc}
+        , #{mainImg})
+    </insert>
+
+    <update id="update" parameterType="Product">
+        UPDATE product
+        SET update_date = current_timestamp
+        <if test="title != null and title != ''">
+            , title = #{title}
+        </if>
+        <if test="desc != null and desc != ''">
+            , `desc` = #{desc}
+        </if>
+        <if test="mainImg != null and mainImg != ''">
+            , main_img = #{mainImg}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Product">
+        DELETE FROM product WHERE id = #{id}
+    </delete>
+
+</mapper>
