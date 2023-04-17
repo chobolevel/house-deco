@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,5 +25,7 @@ public class Member extends Base {
     private String email;
     private String mobile;
     private String address;
+
+    private List<MemberRole> roles = new ArrayList<>();
 
 }
