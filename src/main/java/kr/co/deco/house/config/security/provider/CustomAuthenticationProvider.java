@@ -1,5 +1,7 @@
 package kr.co.deco.house.config.security.provider;
 
+import kr.co.deco.house.config.security.entity.Account;
+import kr.co.deco.house.entity.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +18,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
 
-        return null;
+        Account account = (Account) userDetailsService.loadUserByUsername(username);
+
+        return new UsernamePasswordAuthenticationToken(
+                account.getMember(),
+                null,
+                account.getAuthorities()
+        );
     }
 
     @Override
